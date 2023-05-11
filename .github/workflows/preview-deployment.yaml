@@ -1,0 +1,57 @@
+name: Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  LOCALAZY_FROM_RELEASE_TAG: ${{ secrets.LOCALAZY_DEV_RELEASE_TAG }}
+  LOCALAZY_RELEASE_TAG: ${{ secrets.LOCALAZY_STAGING_RELEASE_TAG }}
+  LOCALAZY_READ_KEY: ${{ secrets.LOCALAZY_READ_KEY }}
+  LOCALAZY_WRITE_KEY: ${{ secrets.LOCALAZY_WRITE_KEY }}
+on:
+  push:
+    branches-ignore:
+      - master
+jobs:
+  Localazy-download-preview:
+    name: Download strings from Localazy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+          token: ${{ secrets.TOKEN }}
+      - name: Install localazy/cli and other dependencies
+        run: npm install
+      - name: Publish production release tag
+        run: npm run localazy:publish
+      - name: Download translated files
+        uses: localazy/download@v1
+        with:
+          read_key: ${{ secrets.LOCALAZY_READ_KEY }}
+          write_key: ${{ secrets.LOCALAZY_WRITE_KEY }}
+          release_tag: ${{ secrets.LOCALAZY_STAGING_RELEASE_TAG }}
+          
+      - run: |
+          # Test that localized files were downloaded by listing 
+          # the content of locales folder.
+          ls src/assets/locales/*.json
+      - name: Commit translation changes to repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Commit latest translations from Localazy.
+          commit_options: '--no-verify'
+          
+  Deploy-Preview:
+    name: Deploy previews on vercel
+    needs: Localazy-download
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        

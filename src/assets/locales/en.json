@@ -1,0 +1,17 @@
+{
+    "heading": "Translating idioms from English to {{ lang }}",
+    "idioms": [
+        "a friend in need is a friend indeed",
+        "cast pearls before swine",
+        "curiosity killed the cat",
+        "don't judge a book by its cover",
+        "early bird catches the worm",
+        "fall on deaf ears",
+        "hit the nail on the head",
+        "it's raining cats and dogs",
+        "jump to conclusions",
+        "kill two birds with one stone"
+    ],
+    "english": "English",
+    "translate_to": "Translate to"
+}
