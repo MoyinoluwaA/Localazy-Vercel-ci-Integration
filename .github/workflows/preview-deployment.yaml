@@ -42,7 +42,7 @@ jobs:
           
   Deploy-Preview:
     name: Deploy previews on vercel
-    needs: Localazy-download
+    needs: Localazy-download-preview
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
