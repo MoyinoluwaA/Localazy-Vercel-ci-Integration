@@ -1,3 +1,17 @@
 {
-
+  "english": "Englanti",
+  "heading": "Sanontojen kääntäminen englannista {{ lang }}",
+  "idioms": [
+    "ystävä hätä on ystävä todellakin",
+    "valettu helmiä ennen sika",
+    "uteliaisuus tappoi kissan",
+    "älä tuomitse kirjaa sen kannen perusteella",
+    "varhainen lintu saaliit mato",
+    "putoavat kuuroille korville",
+    "osui naulan päähän",
+    "sataa kissoja ja koiria",
+    "hypätä johtopäätöksiin",
+    "tappaa kaksi kärpästä yhdellä iskulla"
+  ],
+  "translate_to": "Käännä kielelle"
 }
