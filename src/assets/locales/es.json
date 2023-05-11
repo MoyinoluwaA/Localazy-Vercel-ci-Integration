@@ -1,3 +1,17 @@
 {
-
+  "english": "Inglés",
+  "heading": "Traducir modismos del inglés a {{ lang }}",
+  "idioms": [
+    "un amigo necesitado es un amigo de verdad",
+    "arrojan perlas antes que los cerdos",
+    "la curiosidad mató al gato",
+    "no juzgues un libro por su portada",
+    "el madrugador atrapa el gusano",
+    "caer en saco roto",
+    "dio en el clavo",
+    "está lloviendo perros y gatos",
+    "sacar conclusiones precipitadas",
+    "mata dos pájaros de un tiro"
+  ],
+  "translate_to": "Traducir a"
 }
